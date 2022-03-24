@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"  x-on:submit="validateFields" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de formularios</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="style.css">
+    <script src="alpine.js" defer></script>
+</head>
+<body>
+    <div class="contenedor" x-data="main">
+        <div class="cabecera">
+            <h2>Registrarse</h2>
+        </div>
+        <form id="formulario" autocomplete="off">
+            <div class="form-control" :class="{'ok' : user.valid == true, 'error' : user.valid == false}"  @keyup="validateOnFly('user')">
+                <label for="usuario">Nombre de usuario</label>
+                <input type="text" x-model="user.value" placeholder="Nombre de Usuario">
+                <p>Escriba mínimo 4 caracteres</p>
+            </div>
+            <div class="form-control" :class="{'ok' : email.valid == true, 'error' : email.valid == false}" @keyup="validateOnFly('email')">
+                <label for="email">E-mail</label>
+                <input type="email" x-model="email.value" placeholder="Correo electrónico">
+                <p>El correo debe contener @ y . </p>
+            </div>
+            <div class="form-control" :class="{'ok' : pass.valid == true, 'error' : pass.valid == false}" @keyup="validateOnFly('pass')">
+                <label for="pass">Password</label>
+                <input type="password" placeholder="Contraseña" x-model="pass.value">
+                <p>Asegúrese de que tenga minúsculas, mayúsculas, números y caracteres especiales.</p>
+            </div>
+            <div class="form-control" :class="{'ok' : pass_confirm.valid == true, 'error' : pass_confirm.valid == false}" @keyup="validateOnFly('pass_confirm')">
+                <label for="passConfirma">Confirmar Password</label>
+                <input type="password" x-model="pass_confirm.value" placeholder="Repita su contraseña">
+                <p>La confirmación de contraseña no coincide con la contraseña</p>                
+            </div>
+            <button>Enviar</button>
+        </form>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
